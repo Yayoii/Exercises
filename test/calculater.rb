@@ -1,30 +1,21 @@
-# ある生鮮食品を m[kg] 仕入れました。m[kg] のうち p[%] を売ることができました。次にその売れ残りをすべてお惣菜にして販売したところ、売れ残った量のうち q[%] が売れました.
-# m[kg] 仕入れたこの食品は最終的に何kg 売れ残ったでしょうか。
-# 前提条件
-# 1 ≦ m ≦ 1000
-# 0 ≦ p, q ≦ 100
-# p = 100 のとき、q = 0
+# ある生鮮食品を a[kg] 仕入れました。a[kg] のうち b[%] を売ることができました。次にその売れ残りをすべてお惣菜にして販売したところ、売れ残った量のうち c[%] が売れました.
+# a[kg] 仕入れたこの食品は最終的に何kg 売れ残ったでしょうか。
+# 前提条件 : [1 ≦ a ≦ 1000] [0 ≦ b, c ≦ 100] [p = 100 のとき、q = 0]
 
 def cal
-  input_line = gets
-  input_ary = input_line.split(" ")
+  input_line = gets.split(" ")
 
-  # a = input_line[0].to_i
-  # b = m = input_line[1].to_i
-  # c = input_line[2].to_i
-  a = 0
-  b = 0
-  c = 0
-  
-  [a, b, c].each do |i|
-      n = 0
-      p i = input_ary[n].to_i
-      n += 1
+  ary = []
+  (0..2).each do |i|
+    ary << input_line[i].to_i
   end
 
-  left = a * (1 - b * 0.01)
-  answer = left * (1 - c * 0.01)
-  puts answer.round(3)
+  return ary[2] = 0 if ary[1] == 100
+  left = ary[0].rationalize * (1 - ary[1].rationalize * 0.01r)
+  answer = left * (1 - ary[2].rationalize * 0.01r)
+  puts answer.to_f.round(3)
 end
 
-cal
+# a = input_line[0].to_i
+  # b = input_line[1].to_i
+  # c = input_line[2].to_i
