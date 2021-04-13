@@ -10,7 +10,7 @@ input_ary = gets.split(' ')
 tree = input_ary[0].to_i
 # 安全基準の数
 security_num = input_ary[1].to_i
-# 各木の電球の数
+# 各木の電球の数の配列
 light_of_trees = gets.split(' ').map { |s| s.to_i }
 # 調査する回数
 survey = gets.to_i
@@ -20,10 +20,10 @@ survey.times do |i|
     average = 0
     from_to = gets.split(' ').map { |s| s.to_i }
     survey_ary = light_of_trees[(from_to[0] - 1)..(from_to[1] - 1)]
-    survey_ary.each do |j| # 調査区間の平均値を求める
+    survey_ary.each do |j| # 調査区間の電球の合計数を求める
         sum += j
     end
-    average = sum / survey_ary.size
+    average = sum / survey_ary.size #調査区間の電球の数の平均
     if average < security_num # 平均値が安全基準より低ければ安全基準との差分を追加
         survey_ary.size.times do |j|
             light_of_trees[(from_to[0] - 1) + j] += (security_num - average)
