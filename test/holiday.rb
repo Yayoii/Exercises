@@ -3,27 +3,42 @@
 # 1 行目にスケジュールの日数 N が整数で与えられます（7 ≦ N ≦ 100,000）
 # 2 行目に、その日が平日（１）か休日（０）かを示す N 個の整数が半角スペース区切りで与えられます。
 
-holiday = gets.chomp.to_i
-weekdays_holidays_array = gets.chomp.split(' ').map { |s| s.to_i }
+ndays = gets.chomp.to_i
+days = gets.chomp.split(' ').map { |s| s.to_i }
 
-array = [] # 週休2日以上で働き続けられる期間を入れる配列
-answer_array = [] # 後で最長期間を比べるための空の配列
-first_set = 6 # 最初の６文字分
-(holiday - first_set).times do |i|
-  check_array = weekdays_holidays_array[i..i + first_set] # 一週間毎（７要素毎）に調べていく
-  zero_array = check_array.select { |n| n == 0 }
-  if zero_array.size >= 2
-    next check_array.map { |n| array << n } if array.empty?
-    array << check_array[-1]
-  elsif zero_array.size < 2 && !array.empty?
-    answer_array << array
-    array.clear
+first_set = 6 # 入力値から6日分引くと、チェック回数が求められる
+one_week = 7
+flags = []
+(ndays - first_set).times do |i|
+  zero_count = days[i, one_week].select { |n| n == 0 }.size
+  flags << (zero_count >= 2 ? true : false)
+end
+
+count = 0
+count_array = []
+flags.each do |n| 
+  if n
+    count += 1 
+  else
+    count_array << count
+    count = 0
   end
-  answer_array << array if i == (holiday - first_set - 1 ) # 最後にチェックした配列をanswer_arrayに入れる
 end
+count_array << count
 
-answer = []
-answer_array.size.times do |i|
-  answer = answer_array.max { |a, b| a.size <=> b.size }
+answer = 0
+count_array.size.times do |i|
+  answer = count_array.max { |a, b| a <=> b }
+  answer = answer + first_set unless answer == 0
 end
-p answer.size
+p answer
+
+# flags.each_index do |i|
+#   n = 0
+#   flags[i..-1].each do |f|
+#     break unless f
+#     n += 1
+#   end
+#   flags[i] = n
+# end
+# p flags.max == 0 ? 0 : flags.max + first_set
