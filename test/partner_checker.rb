@@ -9,18 +9,13 @@
 input= gets.chomp.split(' ')
 paire1 = input[0] + input[1]
 paire2 = input[1] + input[0]
-alph_ary = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-paire1_array = []
-paire2_array = []
-paire1.each_char do |s|
-  paire1_array << alph_ary.index(s) + 1
-end
-paire2.each_char do |s|
-  paire2_array << alph_ary.index(s) + 1
-end
-
-def calcurater(array)
+def calcurater(paire)
+  array = []
+  alph_ary = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+  paire.each_char do |s|
+    array << alph_ary.index(s) + 1
+  end
   (array.size - 1).times do |i|
     (array.size - 1).times do |j|
       total = array[j] += array[j + 1]
@@ -33,6 +28,6 @@ def calcurater(array)
 end
 
 which_answer = []
-which_answer << calcurater(paire1_array)[0]
-which_answer << calcurater(paire2_array)[0]
+which_answer << calcurater(paire1)[0]
+which_answer << calcurater(paire2)[0]
 p which_answer.max { |a, b| a <=> b }
