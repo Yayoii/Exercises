@@ -26,7 +26,7 @@ words_ary.each do |word|
       word.size.times do |i|
         array << dial_ary[row + i][col + i]
       end
-      puts (col + 1).to_s + ' ' + (row + 1).to_s if array.join.include?(word)
+      puts '%d %d' % [col + 1, row + 1] if array.join == word
     end
   end
 end
