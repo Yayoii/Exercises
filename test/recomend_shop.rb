@@ -29,5 +29,5 @@ end
 if answer_ary.empty?
   puts 'no'
 else
-  puts answer_ary.uniq.join(' ')
+  puts answer_ary.uniq.sort.join(' ')
 end
